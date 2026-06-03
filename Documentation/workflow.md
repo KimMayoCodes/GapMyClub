@@ -12,22 +12,24 @@ In Windows Power Shell:
 git clone <repo-url>
 cd GolfApp
 
-# Create virtual environment
+# NOTE TO KARL: shorten to py. do not need to add (.venv)
+
+# Create virtual environment (repeat every session)
 python -m venv .venv
 
-# Activate virtual environment
+# Activate virtual environment (repeat every session)
 .venv\Scripts\Activate.ps1
 
 # Upgrade pip
 (.venv)python -m pip install --upgrade pip
 
-#Install Project Dependencies
+#Install Project Dependencies (Karl can skip)
 (.venv) pip install -r requirements.txt
 
 # Run migrations
 (.venv)python manage.py migrate
 
-# Start the server
+# Start the server (repeat occasionally)
 (.venv)python manage.py runserver
 ```
 ------
