@@ -3,6 +3,14 @@
 This document outlines the full process for moving work from task assignment to completion — covering both your Git activity and your responsibilities on the Trello board at each stage.
 
 ------
+
+## Superuser ##
+
+username: super
+password: super
+
+------
+
 ## Setting Up Virtual Environment
 
 In Windows Power Shell:
