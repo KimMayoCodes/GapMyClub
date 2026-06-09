@@ -1,5 +1,6 @@
 from django.conf import settings
 from django.db import models
+from django.core.validators import MinValueValidator
 
 
 class Club(models.Model):
@@ -30,6 +31,7 @@ class Club(models.Model):
         decimal_places=1,
         null=True,
         blank=True,
+        validators=[MinValueValidator(0)],
     )
 
     shortest_distance = models.DecimalField(
@@ -37,6 +39,7 @@ class Club(models.Model):
         decimal_places=1,
         null=True,
         blank=True,
+        validators=[MinValueValidator(0)],
     )
 
     longest_distance = models.DecimalField(
@@ -44,6 +47,7 @@ class Club(models.Model):
         decimal_places=1,
         null=True,
         blank=True,
+        validators=[MinValueValidator(0)],
     )
 
     notes = models.TextField(blank=True)
@@ -96,6 +100,7 @@ class Shot(models.Model):
     carry_distance = models.DecimalField(
         max_digits=5,
         decimal_places=1,
+        validators=[MinValueValidator(0)],
     )
 
     total_distance = models.DecimalField(
@@ -103,6 +108,7 @@ class Shot(models.Model):
         decimal_places=1,
         null=True,
         blank=True,
+        validators=[MinValueValidator(0)],
     )
 
     ball_speed = models.DecimalField(
@@ -110,6 +116,7 @@ class Shot(models.Model):
         decimal_places=1,
         null=True,
         blank=True,
+        validators=[MinValueValidator(0)],
     )
 
     club_speed = models.DecimalField(
@@ -117,6 +124,7 @@ class Shot(models.Model):
         decimal_places=1,
         null=True,
         blank=True,
+        validators=[MinValueValidator(0)],
     )
 
     launch_angle = models.DecimalField(
@@ -124,6 +132,7 @@ class Shot(models.Model):
         decimal_places=1,
         null=True,
         blank=True,
+        validators=[MinValueValidator(0)],
     )
 
     spin_rate = models.PositiveIntegerField(
