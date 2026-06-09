@@ -31,6 +31,5 @@ urlpatterns = [
 
     path("api/health/", health_check),
 
-    path("api/clubs/", include("clubs.urls")),
-    path("api/users/", include("users.urls")),
+    path("api/", include("clubs.urls")),
 ]
