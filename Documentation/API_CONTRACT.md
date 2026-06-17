@@ -1,96 +1,159 @@
 # GapMyClub API Contract
 
-Base URL:
+## Base URL
 
-Development:
-http://localhost:8000/api/
+### Development
 
+```text
+http://localhost:8000/api
+```
 
-## Clubs
+### Local Network Testing
 
-Represents golf clubs owned by a user.
+```text
+http://192.168.1.75:8000/api
+```
+
+Note: The local network IP may change. Run `ipconfig` and use the IPv4 address under `Wireless LAN adapter Wi-Fi`.
 
 ---
 
-### Get All Clubs
+# Clubs
 
+Represents golf clubs tracked by a player.
+
+## Get All Clubs
+
+```http
 GET /clubs/
+```
 
-Response:
+### Response
 
+```json
 [
   {
     "id": 1,
-    "name": "Driver",
-    "club_type": "Wood",
-    "average_distance": 225
+    "user": null,
+    "name": "Callaway",
+    "club_type": "DRIVER",
+    "club_type_display": "Driver",
+    "average_distance": null,
+    "shortest_distance": "180.0",
+    "longest_distance": "380.0",
+    "notes": "Test note",
+    "created_at": "2026-06-04T14:39:30.275156Z",
+    "updated_at": "2026-06-04T14:39:30.275156Z"
   }
 ]
-
-
----
-
-### Create Club
-
-POST /clubs/
-
-Request:
-
-{
-  "name": "7 Iron",
-  "club_type": "Iron"
-}
-
-
-Response:
-
-{
-  "id": 2,
-  "name": "7 Iron",
-  "club_type": "Iron",
-  "average_distance": null
-}
-
+```
 
 ---
 
-## Shot Sessions
+# Shot Sessions
 
-Represents a practice session or simulator session.
+Represents a practice, simulator, or gapping session.
 
+## Get All Sessions
+
+```http
 GET /sessions/
+```
 
-Response:
+### Response
 
+```json
 [
   {
     "id": 1,
-    "date": "2026-06-02",
-    "location": "Indoor Simulator"
+    "user": null,
+    "name": "Indoor",
+    "session_date": "2026-06-04T06:00:00Z",
+    "location": "Round9",
+    "notes": "Test note",
+    "shots_count": 1
   }
 ]
-
+```
 
 ---
 
-## Shots
+# Shots
 
-Represents an individual shot.
+Represents an individual golf shot linked to a club and session.
 
+## Get All Shots
+
+```http
+GET /shots/
+```
+
+## Get Shots by Club
+
+```http
+GET /shots/?club={club_id}
+```
+
+Example:
+
+```http
+GET /shots/?club=1
+```
+
+## Get Shots by Session
+
+```http
+GET /shots/?session={session_id}
+```
+
+Example:
+
+```http
+GET /shots/?session=1
+```
+
+## Create Shot
+
+```http
 POST /shots/
+```
 
-Request:
+### Request
 
+```json
 {
-  "club": 2,
+  "club": 1,
   "session": 1,
-  "distance": 147
+  "carry_distance": 245.0,
+  "total_distance": 260.0,
+  "ball_speed": 145.5,
+  "club_speed": 98.2,
+  "launch_angle": 13.5,
+  "spin_rate": 2500,
+  "notes": "Solid contact"
 }
+```
 
-Response:
+### Response
 
+```json
 {
-  "id": 12,
-  "club": 2,
-  "distance": 147
+  "id": 1,
+  "club": 1,
+  "club_name": "Callaway",
+  "club_type": "DRIVER",
+  "club_type_display": "Driver",
+  "session": 1,
+  "session_name": "Indoor",
+  "carry_distance": "245.0",
+  "total_distance": "260.0"
 }
+```
+
+---
+
+# Notes
+
+- User ownership is currently nullable until authentication is implemented.
+- Decimal fields return as strings from Django REST Framework.
+- Club statistics will eventually be calculated from related shots.

@@ -1,6 +1,6 @@
 // Local development API URL.
 // Update this IP address if your computer's Wi-Fi address changes.
-const API_BASE_URL = "http://192.168.1.184:8000/api";
+const API_BASE_URL = "http://192.168.1.75:8000/api";
 
 export async function apiGet(endpoint: string) {
   try {
