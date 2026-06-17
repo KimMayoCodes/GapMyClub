@@ -6,9 +6,10 @@ export type Club = {
   name: string;
   club_type: string;
   club_type_display: string;
-  average_distance: string | null;
-  shortest_distance: string | null;
-  longest_distance: string | null;
+  average_distance: number | null;
+  shortest_distance: number | null;
+  longest_distance: number | null;
+  shot_count: number;
   notes: string;
   created_at: string;
   updated_at: string;

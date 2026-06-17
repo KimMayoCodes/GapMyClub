@@ -1,6 +1,7 @@
 import { useCallback, useState } from "react";
 import {
   ActivityIndicator,
+  ScrollView,
   StyleSheet,
   Text,
   View,
@@ -53,7 +54,7 @@ export default function ShotsScreen() {
   }
 
   return (
-    <View style={styles.container}>
+    <ScrollView style={styles.container}>
       <Text style={styles.title}>Shots</Text>
 
       <Link href="/shots/add" style={styles.addLink}>
@@ -87,7 +88,7 @@ export default function ShotsScreen() {
           </View>
         ))
       )}
-    </View>
+    </ScrollView>
   );
 }
 

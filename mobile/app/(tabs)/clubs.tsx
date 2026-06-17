@@ -78,6 +78,10 @@ export default function ClubsScreen() {
             </Text>
 
             <Text style={styles.clubDistance}>
+              Shots: {club.shot_count}
+            </Text>
+
+            <Text style={styles.clubDistance}>
               Range: {club.shortest_distance ?? "-"} –{" "}
               {club.longest_distance ?? "-"} yards
             </Text>
