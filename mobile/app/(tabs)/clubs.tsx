@@ -1,10 +1,15 @@
-import { useEffect, useState } from "react";
-import { ActivityIndicator, StyleSheet, Text, View } from "react-native";
+import { useCallback, useState } from "react";
+import {
+  ActivityIndicator,
+  Pressable,
+  StyleSheet,
+  Text,
+  View,
+} from "react-native";
+import { Link, router, useFocusEffect } from "expo-router";
 
-import { Colors, Spacing, FontSizes, BorderRadius } from "@/constants/theme";
 import { Club, getClubs } from "@/api/clubsApi";
-
-import { Link } from "expo-router";
+import { BorderRadius, Colors, FontSizes, Spacing } from "@/constants/theme";
 
 export default function ClubsScreen() {
   const [clubs, setClubs] = useState<Club[]>([]);
@@ -18,16 +23,18 @@ export default function ClubsScreen() {
 
       const data = await getClubs();
       setClubs(data);
-    } catch (err) {
+    } catch {
       setError("Unable to load clubs. Make sure the Django server is running.");
     } finally {
       setLoading(false);
     }
   }
 
-  useEffect(() => {
-    loadClubs();
-  }, []);
+  useFocusEffect(
+    useCallback(() => {
+      loadClubs();
+    }, [])
+  );
 
   if (loading) {
     return (
@@ -58,7 +65,11 @@ export default function ClubsScreen() {
         <Text style={styles.message}>No clubs found.</Text>
       ) : (
         clubs.map((club) => (
-          <View key={club.id} style={styles.card}>
+          <Pressable
+            key={club.id}
+            style={styles.card}
+            onPress={() => router.push(`/clubs/${club.id}`)}
+          >
             <Text style={styles.clubName}>{club.name}</Text>
             <Text style={styles.clubType}>{club.club_type_display}</Text>
 
@@ -70,7 +81,7 @@ export default function ClubsScreen() {
               Range: {club.shortest_distance ?? "-"} –{" "}
               {club.longest_distance ?? "-"} yards
             </Text>
-          </View>
+          </Pressable>
         ))
       )}
     </View>
